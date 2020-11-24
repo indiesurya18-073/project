@@ -32,10 +32,15 @@ if (isset($_POST['login'])) {
 			session_start();
 			$_SESSION["user"] = $user;
 			// login sukses, alihkan ke halaman timeline
-			header("Location: index.php?pesan=sukses");
+			if ($user['level'] == "admin") {
+				header("Location: index.php?pesan=admin");
+			}
+			if ($user['level'] == "user") {
+				header("Location: index.php?pesan=user");
+			}
 		}
 	} else {
-		header("location:index.php?pesan=gagal");
+		header("location:login.php?pesan=gagal");
 	}
 }
 ?>
@@ -66,13 +71,10 @@ if (isset($_POST['login'])) {
 					<label for="username">Username</label>
 					<input class="form-control" type="text" name="username" placeholder="Username atau email" />
 				</div>
-
-
 				<div class="form-group">
 					<label for="password">Password</label>
 					<input class="form-control" type="password" name="password" placeholder="Password" />
 				</div>
-
 				<input type="submit" class="btn btn-success btn-block" name="login" value="Masuk" />
 
 			</form>
