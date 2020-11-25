@@ -21,7 +21,7 @@ if (isset($_POST['login'])) {
 	);
 
 	$stmt->execute($params);
-
+	//eksekusi query
 	$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 	// jika user terdaftar
@@ -45,10 +45,6 @@ if (isset($_POST['login'])) {
 }
 ?>
 
-
-
-
-
 <body>
 
 	<?php
@@ -66,7 +62,7 @@ if (isset($_POST['login'])) {
 			<br>
 			<h3 class="text-center ">Login</h3>
 			<br>
-			<form action="" method="POST">
+			<form action="" name="login" method="POST">
 				<div class="form-group">
 					<label for="username">Username</label>
 					<input class="form-control" type="text" name="username" placeholder="Username atau email" />
@@ -75,11 +71,44 @@ if (isset($_POST['login'])) {
 					<label for="password">Password</label>
 					<input class="form-control" type="password" name="password" placeholder="Password" />
 				</div>
-				<input type="submit" class="btn btn-success btn-block" name="login" value="Masuk" />
+				<input type="submit" class="btn btn-success btn-block" onclick="validasi()" name="login" value="Masuk" />
 
 			</form>
 		</div>
 	</div>
+
+	<script>
+		/*
+		let postBtn = document.querySelector('.post-btn'); //untuk input btn
+		let wrapper = document.querySelector('.create-post-wrapper'); //untuk wrap div
+		let inputs = [...wrapper.querySelectorAll('.post-input')]; //untuk semua input field
+
+		function validate() {
+			let isIncomplete = inputs.some(input => !input.value);
+			postBtn.disabled = isIncomplete;
+			postBtn.style.cursor = isIncomplete ? 'not-allowed' : 'pointer';
+		}
+
+		wrapper.addEventListener('input', validate);
+		validate();
+		*/
+
+		function validasi() {
+			if (document.forms["register"]["username"].value != "") {
+				if (document.forms["register"]["password"].value != "") {
+					alert("Semua data terisi dengan benar");
+					document.getElementById("login").submit();
+					return true;
+				} else {
+					alert("Password tidak boleh kosong");
+					return false;
+				}
+			} else {
+				alert("Username masih kosong");
+				return false;
+			}
+		}
+	</script>
 </body>
 
 </html>
