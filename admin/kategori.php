@@ -1,5 +1,7 @@
-<?php $semuadata = []; ?>
-<?php $ambil = $db->query("SELECT * FROM kategori");
+<?php
+include 'akses.php';
+$semuadata = [];
+$ambil = $db->query("SELECT * FROM kategori");
 while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
     $semuadata[] = $pecah;
 } ?>

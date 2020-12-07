@@ -1,4 +1,6 @@
 <?php
+include 'akses.php';
+
 $id_foto = $_GET['idfoto'];
 $id_produk = $_GET['idproduk'];
 

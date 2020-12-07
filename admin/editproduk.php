@@ -1,3 +1,6 @@
+<?php
+include 'akses.php';
+?>
 <div class="panel-headline">
     <div class="panel-heading">
         <h2>Edit Produk</h2>

@@ -1,4 +1,6 @@
 <?php
+include 'akses.php';
+
 $id_kategori = $_GET['id'];
 $ambil = $db->query("SELECT * FROM kategori WHERE id_kategori='$id_kategori'");
 $pecah = $ambil->fetch(PDO::FETCH_ASSOC); ?>

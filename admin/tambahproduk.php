@@ -1,4 +1,6 @@
 <?php
+include 'akses.php';
+
 $ambildata = [];
 $ambil = $db->query("SELECT * FROM kategori");
 while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {

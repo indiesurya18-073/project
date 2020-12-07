@@ -2,7 +2,7 @@
 session_start();
 //koneksi ke database
 include '../koneksi.php';
-
+include 'akses.php';
 ?>
 
 <!doctype html>

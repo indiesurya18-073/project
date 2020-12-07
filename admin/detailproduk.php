@@ -1,4 +1,6 @@
-<?php $id_produk =  $_GET['id'];
+<?php
+include 'akses.php';
+$id_produk =  $_GET['id'];
 //mengambil data produk
 $ambil = $db->query("SELECT * FROM produk LEFT JOIN kategori ON produk.id_kategori = kategori.id_kategori WHERE produk.id_produk='$id_produk'");
 $detail_produk = $ambil->fetch(PDO::FETCH_ASSOC);

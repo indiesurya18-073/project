@@ -1,4 +1,6 @@
-<?php $semuadata = [];
+<?php
+include 'akses.php';
+$semuadata = [];
 $ambil = $db->query("SELECT * FROM produk LEFT JOIN kategori ON produk.id_kategori=kategori.id_kategori");
 while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
     $semuadata[] = $pecah;
