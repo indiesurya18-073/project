@@ -17,6 +17,9 @@ if (isset($_POST['register'])) {
 					$password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 					$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 					$level = "user";
+					$tlp = filter_input(INPUT_POST, 'tlp', FILTER_SANITIZE_STRING);
+					$alamat = filter_input(INPUT_POST, 'alamat', FILTER_SANITIZE_STRING);
+
 
 					$sql = "SELECT * FROM user WHERE username=:username OR email=:email";
 					$stmt = $db->prepare($sql);
@@ -36,8 +39,8 @@ if (isset($_POST['register'])) {
 						echo '	<script> alert("Email atau username sudah terdaftar") </script>';
 					} else {
 						// menyiapkan query
-						$sql = "INSERT INTO user (name, username, email, password, level) 
-            			VALUES (:name, :username, :email, :password,:level)";
+						$sql = "INSERT INTO user (name, username, email, password, level,alamat_user,tlp_user) 
+            			VALUES (:name, :username, :email, :password,:level,:alamat_user,:tlp_user)";
 						$stmt = $db->prepare($sql);
 
 						// bind parameter ke query
@@ -46,7 +49,9 @@ if (isset($_POST['register'])) {
 							":username" => $username,
 							":password" => $password,
 							":email" => $email,
-							":level" => $level
+							":level" => $level,
+							":alamat_user" => $alamat,
+							":tlp_user" => $tlp
 						);
 
 						// eksekusi query untuk menyimpan ke database
@@ -84,6 +89,16 @@ if (isset($_POST['register'])) {
 				<div class="form-group">
 					<label for="email">Email</label>
 					<input class="form-control post-input" type="email" name="email" placeholder="Alamat Email" />
+				</div>
+
+				<div class="form-group">
+					<label for="tlp">Nomer Telepon</label>
+					<input class="form-control post-input" type="text" name="tlp" placeholder="Nomer Telepon" />
+				</div>
+
+				<div class="form-group">
+					<label for="alamat">Alamat</label>
+					<textarea name="alamat" class="form-control" required cols="30" rows="5"></textarea>
 				</div>
 
 				<div class="form-group">

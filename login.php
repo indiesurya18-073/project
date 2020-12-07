@@ -30,12 +30,14 @@ if (isset($_POST['login'])) {
 		if (password_verify($password, $user["password"])) {
 			// buat Session
 			session_start();
-			$_SESSION["user"] = $user;
 			// login sukses, alihkan ke halaman timeline
 			if ($user['level'] == "admin") {
-				header("Location: index.php?pesan=admin");
+				$_SESSION["admin"] = $user;
+				header("Location: admin/index.php?pesan=admin");
 			}
 			if ($user['level'] == "user") {
+				$_SESSION["user"] = $user;
+
 				header("Location: index.php?pesan=user");
 			}
 		}
