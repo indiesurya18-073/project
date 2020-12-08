@@ -1,6 +1,4 @@
 <?php
-include 'akses.php';
-
 $ambildata = [];
 $ambil = $db->query("SELECT * FROM kategori");
 while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
@@ -43,8 +41,8 @@ while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
                     <input type="number" min="0" required class="form-control" name="berat">
                 </div>
                 <div class="form-group">
-                    <label for="detail_produk">Detail Produk</label>
-                    <textarea name="detail_produk" required class="form-control" cols="30" rows="10"></textarea>
+                    <label for="spesifikasi_Produk">Spesifikasi Produk</label>
+                    <textarea name="spesifikasi" required class="form-control" cols="30" rows="10"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="foto_Produk">Foto Produk</label>
@@ -68,8 +66,8 @@ while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
         $nama_foto_baru[] = date("YmdHis") . $value;
     }
     move_uploaded_file($lokasilokasifoto[0], "../foto_produk/" . $nama_foto_baru[0]);
-    $db->query("INSERT INTO produk (id_kategori,nama_produk,harga_produk,stok_produk,berat_produk,detail_produk,foto_produk)
-    VALUES('$_POST[kategori]','$_POST[nama]','$_POST[harga]','$_POST[stok]','$_POST[berat]','$_POST[detail_produk]','$nama_foto_baru[0]')");
+
+    $db->query("INSERT INTO produk (id_kategori,nama_produk,harga_produk,stok_produk,berat_produk,spesifikasi_produk,foto_produk) VALUES('$_POST[kategori]','$_POST[nama]','$_POST[harga]','$_POST[stok]','$_POST[berat]','$_POST[spesifikasi]','$nama_foto_baru[0]')");
 
     //mendapatkan id produk barusan
     $idprodukbaru = $db->lastInsertId();
@@ -83,6 +81,7 @@ while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
     }
 
     echo '<div class="alert alert-info">Data Tersimpan</div>';
+    #echo '<meta http-equiv="refresh" content="1;url=index.php?halaman=produk">';
 }
 ?>
 <!-- <pre><?php print_r($nama_foto_baru) ?></pre> -->
