@@ -11,19 +11,19 @@ include 'akses.php';
         <form method="post">
             <div class="form-group">
                 <label for="nama_user">Nama</label>
-                <input type="text" value="<?= $pecah['nama_user'] ?>" class="form-control" name="nama">
+                <input type="text" value="<?= $pecah['name'] ?>" class="form-control" name="nama">
             </div>
             <div class="form-group">
                 <label for="username_user">Username</label>
-                <input type="text" value="<?= $pecah['username_user'] ?>" class="form-control" name="username">
+                <input type="text" value="<?= $pecah['username'] ?>" class="form-control" name="username">
             </div>
             <div class="form-group">
                 <label for="password_user">Password</label>
-                <input type="text" value="<?= $pecah['password_user'] ?>" class="form-control" name="password">
+                <input type="text" value="<?= $pecah['password'] ?>" class="form-control" name="password">
             </div>
             <div class="form-group">
                 <label for="email_user">Email</label>
-                <input type="email" value="<?= $pecah['email_user'] ?>" class="form-control" name="email">
+                <input type="email" value="<?= $pecah['email'] ?>" class="form-control" name="email">
             </div>
             <div class="form-group">
                 <label for="tlp_user">Nomor Telepon</label>
@@ -38,7 +38,7 @@ include 'akses.php';
     </div>
 </div>
 <?php if (isset($_POST["simpan"])) {
-    $db->query("UPDATE user SET nama_user='$_POST[nama]',username_user='$_POST[username]',password_user='$_POST[password]',email_user='$_POST[email]',tlp_user='$_POST[tlp]',alamat_user='$_POST[alamat]' WHERE id_user='$_GET[id]'");
+    $db->query("UPDATE user SET name='$_POST[nama]',username='$_POST[username]',password='$_POST[password]',email='$_POST[email]',tlp_user='$_POST[tlp]',alamat_user='$_POST[alamat]' WHERE id_user='$_GET[id]'");
     echo "<script>alert('User berhasil dirubah');</script>";
     echo "<script>location='index.php?halaman=user';</script>";
 }
