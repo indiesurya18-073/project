@@ -45,124 +45,30 @@ include 'navbar.php';
         <h2>Produk Terbaru</h2>
         <div class="container mt-3">
             <div class="row">
-                <div class="card-group" style="height: 260px; width: 222px;">
-                    <div class="card-group" style="height: 250px; width: 200px;">
-                        <div class="card">
-                            <img class="card-img-top mx-auto" style="object-fit: cover; width : 75%;" src="img/camera.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h6 class="card-title" style="overflow:hidden; height: 35px;"><a href="#"> Camera Canon M100 Special</a></h6>
-                                <h7 class="card-title align-left">Rp.30.000.000</h7>
-                            </div>
+                <?php $i=1;
+                $ambil = $koneksi->query("SELECT * FROM produk ORDER BY id_produk DESC ");?>
+                <?php  while($perproduk = $ambil->fetch_assoc()){?>
+                <?php if($i<=8): ?>
+                <div class="col-lg-3 col-xs-12 col-sm-6 mb-3">
+                    <div class="card">
+                        <img class="card-img-top" src="foto_produk/<?= $perproduk['foto_produk']?>" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="detail.php?&id=<?=$perproduk['id_produk']?>"><?= $perproduk['nama_produk']?></a></h5>
+                            <h6 class="card-title">Rp. <?= number_format($perproduk['harga_produk'])?></h6>
+                            <?php if($perproduk['stok_produk']!=='0'):?>
+                            <a href="beli.php?id=<?=$perproduk['id_produk']?>"><button class="btn btn-primary">Beli</button></a>
+                            <a href="detail.php?&id=<?=$perproduk['id_produk']?>" class="btn btn-secondary">Detail</a>
+                            <?php else :?>
+                            <p class="text-danger">Stok Produk Kosong</p>
+                            <?php endif?>
                         </div>
                     </div>
                 </div>
-                <div class="card-group" style="height: 260px; width: 222px;">
-                    <div class="card-group" style="height: 250px; width: 200px;">
-                        <div class="card">
-                            <img class="card-img-top mx-auto" style="object-fit: cover; width : 75%;" src="img/camera.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h6 class="card-title" style="overflow:hidden; height: 35px;"><a href="#"> Camera Canon M100 Special</a></h6>
-                                <h7 class="card-title align-left">Rp.30.000.000</h7>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-group" style="height: 260px; width: 222px;">
-                    <div class="card-group" style="height: 250px; width: 200px;">
-                        <div class="card">
-                            <img class="card-img-top mx-auto" style="object-fit: cover; width : 75%;" src="img/camera.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h6 class="card-title" style="overflow:hidden; height: 35px;"><a href="#"> Camera Canon M100 Special</a></h6>
-                                <h7 class="card-title align-left">Rp.30.000.000</h7>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-group" style="height: 260px; width: 222px;">
-                    <div class="card-group" style="height: 250px; width: 200px;">
-                        <div class="card">
-                            <img class="card-img-top mx-auto" style="object-fit: cover; width : 75%;" src="img/camera.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h6 class="card-title" style="overflow:hidden; height: 35px;"><a href="#"> Camera Canon M100 Special</a></h6>
-                                <h7 class="card-title align-left">Rp.30.000.000</h7>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-group" style="height: 260px; width: 222px;">
-                    <div class="card-group" style="height: 250px; width: 200px;">
-                        <div class="card">
-                            <img class="card-img-top mx-auto" style="object-fit: cover; width : 75%;" src="img/camera.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h6 class="card-title" style="overflow:hidden; height: 35px;"><a href="#"> Camera Canon M100 Special</a></h6>
-                                <h7 class="card-title align-left">Rp.30.000.000</h7>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-group" style="height: 260px; width: 222px;">
-                    <div class="card-group" style="height: 250px; width: 200px;">
-                        <div class="card">
-                            <img class="card-img-top mx-auto" style="object-fit: cover; width : 75%;" src="img/camera.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h6 class="card-title" style="overflow:hidden; height: 35px;"><a href="#"> Camera Canon M100 Special</a></h6>
-                                <h7 class="card-title align-left">Rp.30.000.000</h7>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-group" style="height: 260px; width: 222px;">
-                    <div class="card-group" style="height: 250px; width: 200px;">
-                        <div class="card">
-                            <img class="card-img-top mx-auto" style="object-fit: cover; width : 75%;" src="img/camera.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h6 class="card-title" style="overflow:hidden; height: 35px;"><a href="#"> Camera Canon M100 Special</a></h6>
-                                <h7 class="card-title align-left">Rp.30.000.000</h7>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-group" style="height: 260px; width: 222px;">
-                    <div class="card-group" style="height: 250px; width: 200px;">
-                        <div class="card">
-                            <img class="card-img-top mx-auto" style="object-fit: cover; width : 75%;" src="img/camera.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h6 class="card-title" style="overflow:hidden; height: 35px;"><a href="#"> Camera Canon M100 Special</a></h6>
-                                <h7 class="card-title align-left">Rp.30.000.000</h7>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-group" style="height: 260px; width: 222px;">
-                    <div class="card-group" style="height: 250px; width: 200px;">
-                        <div class="card">
-                            <img class="card-img-top mx-auto" style="object-fit: cover; width : 75%;" src="img/camera.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h6 class="card-title" style="overflow:hidden; height: 35px;"><a href="#"> Camera Canon M100 Special</a></h6>
-                                <h7 class="card-title align-left">Rp.30.000.000</h7>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-group" style="height: 260px; width: 222px;">
-                    <div class="card-group" style="height: 250px; width: 200px;">
-                        <div class="card">
-                            <img class="card-img-top mx-auto" style="object-fit: cover; width : 75%;" src="img/camera.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h6 class="card-title" style="overflow:hidden; height: 35px;"><a href="#"> Camera Canon M100 Special</a></h6>
-                                <h7 class="card-title align-left">Rp.30.000.000</h7>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
+                <?php $i++;
+                endif;
+                } ?>
             </div>
         </div>
-
     </div>
 
 
