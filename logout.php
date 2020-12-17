@@ -2,4 +2,6 @@
 
 session_start();
 session_destroy();
-header("Location: shop.php");
+header("Location: index.php");
+
+?>
