@@ -8,7 +8,6 @@ while($pecahkategori = $ambilkategori->fetch_assoc()){
 }
 include 'navbar.php';
 ?>
-
 <body class="bg-secondary">
     <!--Slide foto-->
     <br><br>
@@ -56,7 +55,7 @@ include 'navbar.php';
                 </div>
         </div>
         <br>
-        <h2>Produk Terbaru</h2>
+        <h2>New Product</h2>
         <div class="container mt-3">
             <div class="row">
                 <?php $i=1;
@@ -94,6 +93,5 @@ include 'navbar.php';
     <?php 
         include 'footer.php';
      ?>
-
 </body>
 </html>
