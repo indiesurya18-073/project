@@ -17,7 +17,6 @@
 
 <body>
 
-
     <div class="navbar-wrapper">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="container">
@@ -27,7 +26,6 @@
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ml-auto px-2">
                         <form class="form-inline" action="#" method="get">
@@ -55,7 +53,6 @@
                                 <a href="login.php" type="button" class="btn btn-outline-info btn-md btn-rounded  waves-effect px-2">Login</a>
                             </li>
                         <?php endif ?>
-
                     </div>
                 </div>
             </div>
