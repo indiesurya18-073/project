@@ -12,7 +12,7 @@ include 'akses.php';
     // var_dump($detail);
     ?>
     <div class="panel-body">
-
+        
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-3">
@@ -22,7 +22,7 @@ include 'akses.php';
                         ?>
                 <span class="label label-info"><?= $status ?></span>
 
-            <?php elseif ($status == "Sudah mengirim pembayaran") : ?>
+            <?php elseif ($status == "Sudah Mengirim Pembayaran") : ?>
 
                 <span class="label label-primary"><?= $status ?></span>
 
