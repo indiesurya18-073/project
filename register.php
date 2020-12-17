@@ -2,70 +2,42 @@
 session_start();
 include("navbar.php");
 
-if (isset($_SESSION["user"])) header("Location: index.php");
-if (isset($_POST['register'])) {
-	if (!empty($_POST["name"])) {
-		if (!empty($_POST["username"])) {
-			if (!empty($_POST["email"])) {
-				if (!empty($_POST["password"])) {
-
-
-					// filter data yang diinputkan
-					$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-					$username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-					// enkripsi password
-					$password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-					$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-					$level = "user";
-					$tlp = filter_input(INPUT_POST, 'tlp', FILTER_SANITIZE_STRING);
-					$alamat = filter_input(INPUT_POST, 'alamat', FILTER_SANITIZE_STRING);
-
-
-					$sql = "SELECT * FROM user WHERE username=:username OR email=:email";
-					$stmt = $db->prepare($sql);
-
-					// bind parameter ke query
-					$params = array(
-						":username" => $username,
-						":email" => $username
-					);
-
-					$stmt->execute($params);
-					//eksekusi query
-					$user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-					// jika user terdaftar
-					if ($user) {
-						echo '	<script> alert("Email atau username sudah terdaftar") </script>';
-					} else {
-						// menyiapkan query
-						$sql = "INSERT INTO user (name, username, email, password, level,alamat_user,tlp_user) 
-            			VALUES (:name, :username, :email, :password,:level,:alamat_user,:tlp_user)";
-						$stmt = $db->prepare($sql);
-
-						// bind parameter ke query
-						$params = array(
-							":name" => $name,
-							":username" => $username,
-							":password" => $password,
-							":email" => $email,
-							":level" => $level,
-							":alamat_user" => $alamat,
-							":tlp_user" => $tlp
-						);
-
-						// eksekusi query untuk menyimpan ke database
-						$saved = $stmt->execute($params);
-
-						// jika query simpan berhasil, maka user sudah terdaftar
-						// maka alihkan ke halaman login
-						if ($saved) header("Location: login.php");
-					}
-				}
-			}
-		}
-	}
-}
+if(isset($_POST['register'])){
+          //mengambil isi dari inputan user
+          $name = $_POST['name'];
+          $email = $_POST['email'];
+          $username = $_POST['username'];
+          $password = $_POST['password'];
+          $level = "user";
+          $tlp = $_POST['tlp'];
+          $alamat = $_POST['alamat'];
+          //cek apakah email username, dan nomor telepon sudah ada
+          $ambil1 = $koneksi->query("SELECT * FROM  user WHERE email='$email'");
+          $sama1 = $ambil1->num_rows;
+          if($sama1==1){
+              echo "<script>alert('Gagal registrasi, email sudah pernah digunakan')</script>";
+              echo "<script>location='register.php'</script>";
+          }else{
+                $ambil2 = $koneksi->query("SELECT * FROM  user WHERE username='$username'");
+                $sama2 = $ambil2->num_rows;
+                if($sama2==1){
+                    echo "<script>alert('Gagal registrasi, username sudah pernah digunakan')</script>";
+                    echo "<script>location='register.php'</script>";
+                }else{
+                    $ambil3 = $koneksi->query("SELECT * FROM  user WHERE tlp_user='$tlp'");
+                    $sama3 = $ambil3->num_rows;
+                    if($sama3==1){
+                        echo "<script>alert('Gagal registrasi, Nomor Telepon sudah pernah digunakan')</script>";
+                        echo "<script>location='register.php'</script>";
+                    }else{
+                        //masukan ke dalam database
+                        $koneksi->query("INSERT INTO user (name,username, email,password,alamat_user,tlp_user,level) VALUES ('$name','$username','$email','$password','$alamat','$tlp','$level')");
+                        echo "<script>alert('Registrasi berhasil!!, silahkan login')</script>";
+                        echo "<script>location='login.php'</script>";
+                    }
+                }
+            }
+      }
 ?>
 
 <body>
@@ -85,7 +57,10 @@ if (isset($_POST['register'])) {
 					<label for="username">Username</label>
 					<input class="form-control post-input" type="text" name="username" placeholder="Username" />
 				</div>
-
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input class="form-control post-input" type="password" name="password" placeholder="Password" />
+				</div>
 				<div class="form-group">
 					<label for="email">Email</label>
 					<input class="form-control post-input" type="email" name="email" placeholder="Alamat Email" />
@@ -100,61 +75,48 @@ if (isset($_POST['register'])) {
 					<label for="alamat">Alamat</label>
 					<textarea name="alamat" class="form-control" required cols="30" rows="5"></textarea>
 				</div>
-
-				<div class="form-group">
-					<label for="password">Password</label>
-					<input class="form-control post-input" type="password" name="password" placeholder="Password" />
-				</div>
-
 				<input type="submit" class="btn post-btn btn-success btn-block" onclick="validasi()" name="register" value="Daftar" />
 
 			</form>
 		</div>
 	</div>
 	<script>
-		/*
-		let postBtn = document.querySelector('.post-btn'); //untuk input btn
-		let wrapper = document.querySelector('.create-post-wrapper'); //untuk wrap div
-		let inputs = [...wrapper.querySelectorAll('.post-input')]; //untuk semua input field
-
-		function validate() {
-			let isIncomplete = inputs.some(input => !input.value);
-			postBtn.disabled = isIncomplete;
-			postBtn.style.cursor = isIncomplete ? 'not-allowed' : 'pointer';
-		}
-
-		wrapper.addEventListener('input', validate);
-		validate();
-		*/
-
-		function validasi() {
-			if (document.forms["register"]["name"].value != "") {
-				if (document.forms["register"]["username"].value != "") {
-					if (document.forms["register"]["email"].value != "") {
-						if (document.forms["register"]["password"].value != "") {
-							alert("Semua data terisi dengan benar");
-							document.getElementById("register").submit();
-							return true;
-						} else {
-							alert("Password tidak boleh kosong");
-							return false;
+	function validasi() {
+		if (document.forms["register"]["name"].value != "") {
+			if (document.forms["register"]["username"].value != "") {
+				if (document.forms["register"]["email"].value != "") {
+					if (document.forms["register"]["password"].value != "") {
+						if (document.forms["register"]["tlp"].value != "") {
+							if (document.forms["register"]["alamat"].value != "") {
+								alert("Semua telah terisi");
+								document.getElementById("register").submit();
+								return true;
+							} else {
+								alert("Alamat tidak boleh kosong");
+							}
+						}else {
+							alert("Nomor Telepon tidak boleh kosong");``
 						}
 					} else {
-						alert("Email masih kosong");
+						alert("Password tidak boleh kosong");
 						return false;
 					}
-
 				} else {
-					alert("Username masih kosong");
+					alert("Email masih kosong");
 					return false;
 				}
 
-
 			} else {
-				alert("Nama masih kosong");
+				alert("Username masih kosong");
 				return false;
 			}
+
+
+		} else {
+			alert("Nama masih kosong");
+			return false;
 		}
+	}
 	</script>
 </body>
 
