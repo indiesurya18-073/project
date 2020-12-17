@@ -1,5 +1,4 @@
 <footer class="page-footer font-small bg-dark">
-
         <!-- Footer Links -->
         <div class="container text-center text-md-left pt-4 pt-md-5">
 
@@ -37,7 +36,6 @@
                     <hr class="color-primary mb-4 mt-0 d-inline-block mx-auto w-60">
                     <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo aliquam quidem animi quia illo hic iure, cum, voluptate ipsa praesentium accusantium omnis maxime sunt commodi ipsam facere excepturi sit at?</p>
 
-
                 </div>
                 <!-- Grid column -->
 
@@ -74,7 +72,7 @@
 
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3 text-muted">© 2020 Copyright:
-            <a href="#"> Camshot</a>
+            <a href="#"> CAMSHOT</a>
         </div>
         <!-- Copyright -->
 
