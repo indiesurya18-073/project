@@ -7,7 +7,7 @@ include 'carousel.php';
     
 <div class="container">
     <br>
-    <h2>Produk Terbaru</h2>
+    <h2>New Product</h2>
     <div class="container mt-3">
         <div class="row">
             <?php $i=1;
@@ -24,7 +24,7 @@ include 'carousel.php';
                         <a href="beli.php?id=<?=$perproduk['id_produk']?>"><button class="btn btn-primary">Beli</button></a>
                         <a href="detail.php?&id=<?=$perproduk['id_produk']?>" class="btn btn-secondary">Detail</a>
                         <?php else :?>
-                        <p class="text-danger">Stok Produk Kosong</p>
+                        <p class="text-danger">stok produk kosong</p>
                         <?php endif?>
                     </div>
                 </div>
