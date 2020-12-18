@@ -47,8 +47,8 @@ include 'akses.php';
         <!-- NAVBAR -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <!-- Logo Sisuka -->
-            <div class="brand">
-                <a href="index.php"><img src="assets/img/logo.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+            <div class="navbar-brand">
+                <a href="index.php"><h4>Camshot</h4></a>
             </div>
             <div class="container-fluid">
                 <div class="navbar-btn">
@@ -56,20 +56,6 @@ include 'akses.php';
                 </div>
                 <div id="navbar-menu">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-                                <i class="lnr lnr-alarm"></i>
-                                <span class="badge bg-danger">5</span>
-                            </a>
-                            <ul class="dropdown-menu notifications">
-                                <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
-                                <li><a href="#" class="more">See all notifications</a></li>
-                            </ul>
-                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/admin.jpeg" class="img-circle" alt="Avatar"> <span>Admin</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                             <ul class="dropdown-menu">
@@ -115,8 +101,16 @@ include 'akses.php';
                                 include 'produk.php';
                             } else if ($_GET['halaman'] == "kategori") {
                                 include 'kategori.php';
+                            } else if ($_GET['halaman'] == "pembelian"){
+                                include 'pembelian.php';
+                            } else if ($_GET['halaman'] == "detailpembelian"){
+                                include 'detailpembelian.php';
                             } else if ($_GET['halaman'] == "user") {
                                 include 'user.php';
+                            } else if ($_GET['halaman'] == "pembayaran") {
+                                include 'pembayaran.php';
+                            } else if ($_GET['halaman'] == "laporan_pembelian") {
+                                include 'laporan_pembelian.php';
                             } else if ($_GET['halaman'] == "tambahproduk") {
                                 include 'tambahproduk.php';
                             } else if ($_GET['halaman'] == "hapusproduk") {
@@ -155,7 +149,7 @@ include 'akses.php';
         <div class="clearfix"></div>
         <footer>
             <div class="container-fluid">
-                <p class="copyright">Created by Sisuka Team <i class="fa fa-love"></i>
+                <p class="copyright">Created by Camshot Team <i class="fa fa-love"></i>
                 </p>
             </div>
         </footer>
