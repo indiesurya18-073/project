@@ -1,8 +1,8 @@
 <?php
 include 'akses.php';
 $semuadata = [];
-$ambil = $db->query("SELECT * FROM kategori");
-while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
+$ambil = $koneksi->query("SELECT * FROM kategori");
+while ($pecah = $ambil->fetch_assoc()) {
     $semuadata[] = $pecah;
 } ?>
 <div class="panel-headline">
