@@ -2,8 +2,8 @@
 include 'akses.php';
 
 $id_kategori = $_GET['id'];
-$ambil = $db->query("SELECT * FROM kategori WHERE id_kategori='$id_kategori'");
-$pecah = $ambil->fetch(PDO::FETCH_ASSOC); ?>
+$ambil = $koneksi->query("SELECT * FROM kategori WHERE id_kategori='$id_kategori'");
+$pecah = $ambil->fetch_assoc(); ?>
 <div class="panel-headline">
     <div class="panel-heading">
         <h2>Edit Kategori</h2>
@@ -19,7 +19,7 @@ $pecah = $ambil->fetch(PDO::FETCH_ASSOC); ?>
                 </div>
                 <button name="simpan" class="btn btn-primary">Simpan</button>
                 <?php if (isset($_POST["simpan"])) {
-                    $db->query("UPDATE kategori SET nama_kategori='$_POST[nama]' WHERE id_kategori='$id_kategori'");
+                    $koneksi->query("UPDATE kategori SET nama_kategori='$_POST[nama]' WHERE id_kategori='$id_kategori'");
                     echo '<div class="alert alert-info">Data Tersimpan</div>';
                     echo '<meta http-equiv="refresh" content="1;url=index.php?halaman=kategori">';
                 }
