@@ -1,8 +1,8 @@
 <?php
 include 'akses.php';
 $semuadata = [];
-$ambil = $db->query("SELECT * FROM produk LEFT JOIN kategori ON produk.id_kategori=kategori.id_kategori");
-while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
+$ambil = $koneksi->query("SELECT * FROM produk LEFT JOIN kategori ON produk.id_kategori=kategori.id_kategori");
+while ($pecah = $ambil->fetch_assoc()) {
     $semuadata[] = $pecah;
 }
 ?>
@@ -22,7 +22,6 @@ while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
                 <th scope="col">Nama Kamera</th>
                 <th scope="col">Harga</th>
                 <th scope="col">Stok</th>
-                <th scope="col">Berat Kamera</th>
                 <th scope="col">Spesifikasi</th>
                 <th scope="col">Gambar Kamera</th>
                 <th scope="col">Aksi</th>
@@ -48,9 +47,6 @@ while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
                     <td>
                         <?= $value['stok_produk']; ?>
                     </td>
-                    <td>
-                        <?= number_format($value['berat_produk']); ?> Gram
-                    </td>
                     <td style="width: 30%;">
                         <?= $value['spesifikasi_produk']; ?>
                     </td>
@@ -59,7 +55,7 @@ while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
                     </td>
                     <td><a href="index.php?halaman=detailproduk&id=<?= $value['id_produk']; ?>" class="btn btn-info btn-sm"><span class="lnr lnr-magnifier"></span>Detail</a>
                         <a href="index.php?halaman=hapusproduk&id=<?= $value['id_produk']; ?>" class="btn btn-danger btn-sm"><span class="lnr lnr-trash"></span>Hapus</a>
-                        <a href="index.php?halaman=editproduk&id=<?= $value['id_produk']; ?>" class="btn btn-warning btn-sm" style="margin-top:10px"><span class="lnr lnr-pencil"></span>Edit</a></td>
+                        <a href="index.php?halaman=editproduk&id=<?= $value['id_produk']; ?>" class="btn btn-warning btn-sm"><span class="lnr lnr-pencil"></span>Edit</a></td>
                 </tr>
 
             <?php endforeach ?>
