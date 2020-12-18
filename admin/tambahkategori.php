@@ -17,7 +17,7 @@ include 'akses.php';
                 </div>
                 <button name="tambah" class="btn btn-primary">Tambah</button>
                 <?php if (isset($_POST["tambah"])) {
-                    $db->query("INSERT INTO kategori (nama_kategori) VALUES ('$_POST[nama]')");
+                    $koneksi->query("INSERT INTO kategori (nama_kategori) VALUES ('$_POST[nama]')");
                     echo '<div class="alert alert-info">Data Tersimpan</div>';
                     echo '<meta http-equiv="refresh" content="1;url=index.php?halaman=kategori">';
                 }
