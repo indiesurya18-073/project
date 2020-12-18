@@ -5,8 +5,8 @@ $id_foto = $_GET['idfoto'];
 $id_produk = $_GET['idproduk'];
 
 //mengambil data foto dari database
-$ambil = $db->query("SELECT * FROM produk_foto LEFT JOIN produk ON produk_foto.id_produk=produk.id_produk WHERE produk_foto.id_produk_foto='$id_foto'");
-$pecah = $ambil->fetch(PDO::FETCH_ASSOC);
+$ambil = $koneksi->query("SELECT * FROM produk_foto LEFT JOIN produk ON produk_foto.id_produk=produk.id_produk WHERE produk_foto.id_produk_foto='$id_foto'");
+$pecah = $ambil->fetch_assoc();
 
 //mengambil data foto utama dan foto yang ingin dihapus
 
@@ -17,10 +17,10 @@ if ($namafotodihapus == $namafotoutama) {
     //menghapus foto dari folder
     unlink("../foto_produk/" . $namafotodihapus);
     // menghapus foto dalam database
-    $db->query("DELETE FROM produk_foto WHERE id_produk_foto='$id_foto'");
+    $koneksi->query("DELETE FROM produk_foto WHERE id_produk_foto='$id_foto'");
     //mencari foto pengganti untuk foto utama
     $foto = [];
-    $ambilfoto = $db->query("SELECT * FROM produk_Foto WHERE id_produk='$id_produk'");
+    $ambilfoto = $koneksi->query("SELECT * FROM produk_Foto WHERE id_produk='$id_produk'");
     while ($pecahfoto = $ambilfoto->fetch_assoc()) {
         $foto[] = $pecahfoto;
     }
@@ -31,13 +31,13 @@ if ($namafotodihapus == $namafotoutama) {
         }
     }
     //masukan foto utama terbaru ke database
-    $db->query("UPDATE produk SET foto_produk='$fotoutama' WHERE id_produk='$id_produk'");
+    $koneksi->query("UPDATE produk SET foto_produk='$fotoutama' WHERE id_produk='$id_produk'");
 } else {
 
     //menghapus foto dari folder
     unlink("../foto_produk/" . $namafotodihapus);
     //menghapus foto dalam database
-    $db->query("DELETE FROM produk_foto WHERE id_produk_foto='$id_foto'");
+    $koneksi->query("DELETE FROM produk_foto WHERE id_produk_foto='$id_foto'");
 }
 
 //redirect
