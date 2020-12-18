@@ -1,7 +1,7 @@
 <?php
 $ambildata = [];
-$ambil = $db->query("SELECT * FROM kategori");
-while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
+$ambil = $koneksi->query("SELECT * FROM kategori");
+while ($pecah = $ambil->fetch_assoc()) {
     $ambildata[] = $pecah;
 }
 ?>
@@ -37,10 +37,6 @@ while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
                     <input type="number" min="0" required class="form-control" name="stok">
                 </div>
                 <div class="form-group">
-                    <label for="berat_Produk">Berat Produk(Gr)</label>
-                    <input type="number" min="0" required class="form-control" name="berat">
-                </div>
-                <div class="form-group">
                     <label for="spesifikasi_Produk">Spesifikasi Produk</label>
                     <textarea name="spesifikasi" required class="form-control" cols="30" rows="10"></textarea>
                 </div>
@@ -67,17 +63,17 @@ while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
     }
     move_uploaded_file($lokasilokasifoto[0], "../foto_produk/" . $nama_foto_baru[0]);
 
-    $db->query("INSERT INTO produk (id_kategori,nama_produk,harga_produk,stok_produk,berat_produk,spesifikasi_produk,foto_produk) VALUES('$_POST[kategori]','$_POST[nama]','$_POST[harga]','$_POST[stok]','$_POST[berat]','$_POST[spesifikasi]','$nama_foto_baru[0]')");
+    $koneksi->query("INSERT INTO produk (id_kategori,nama_produk,harga_produk,stok_produk,spesifikasi_produk,foto_produk) VALUES('$_POST[kategori]','$_POST[nama]','$_POST[harga]','$_POST[stok]','$_POST[spesifikasi]','$nama_foto_baru[0]')");
 
     //mendapatkan id produk barusan
-    $idprodukbaru = $db->lastInsertId();
+    $idprodukbaru = $koneksi->insert_id;
 
     foreach ($nama_foto_baru as $key => $tiap_nama) {
         $tiap_lokasi = $lokasilokasifoto[$key];
         move_uploaded_file($tiap_lokasi, "../foto_produk/" . $tiap_nama);
 
         //simpan ke database sesuai dengan id produk
-        $db->query("INSERT INTO produk_foto (id_produk,nama_produk_foto) VALUES ('$idprodukbaru','$tiap_nama')");
+        $koneksi->query("INSERT INTO produk_foto (id_produk,nama_produk_foto) VALUES ('$idprodukbaru','$tiap_nama')");
     }
 
     echo '<div class="alert alert-info">Data Tersimpan</div>';
