@@ -2,12 +2,12 @@
 include 'akses.php';
 $id_produk =  $_GET['id'];
 //mengambil data produk
-$ambil = $db->query("SELECT * FROM produk LEFT JOIN kategori ON produk.id_kategori = kategori.id_kategori WHERE produk.id_produk='$id_produk'");
-$detail_produk = $ambil->fetch(PDO::FETCH_ASSOC);
+$ambil = $koneksi->query("SELECT * FROM produk LEFT JOIN kategori ON produk.id_kategori = kategori.id_kategori WHERE produk.id_produk='$id_produk'");
+$detail_produk = $ambil->fetch_assoc();
 //mengambil data foto
-$ambil = $db->query("SELECT * FROM produk_foto WHERE id_produk='$id_produk'");
+$ambil = $koneksi->query("SELECT * FROM produk_foto WHERE id_produk='$id_produk'");
 $semuafoto = [];
-while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
+while ($pecah = $ambil->fetch_assoc()) {
     $semuafoto[] = $pecah;
 }
 ?>
@@ -31,10 +31,6 @@ while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
         <tr>
             <th>Harga</th>
             <td>Rp.<?= number_format($detail_produk['harga_produk']) ?></td>
-        </tr>
-        <tr>
-            <th>Berat</th>
-            <td><?= number_format($detail_produk['berat_produk']) ?> Gr</td>
         </tr>
         <tr>
             <th>Spesifikasi</th>
@@ -72,7 +68,7 @@ if (isset($_POST['simpan'])) {
     //upload
     move_uploaded_file($lokasifoto, "../foto_produk/" . $namafotobaru);
     //query 
-    $db->query("INSERT INTO produk_foto (id_produk,nama_produk_foto) VALUES ('$id_produk','$namafotobaru')");
+    $koneksi->query("INSERT INTO produk_foto (id_produk,nama_produk_foto) VALUES ('$id_produk','$namafotobaru')");
 
 
     echo "<script>alert('Foto Produk Berhasil Disimpan');</script>";
