@@ -4,3 +4,4 @@ if (!isset($_SESSION['admin'])) {
     echo "<script>location='../index.php';</script>";
     exit();
 }
+?>
