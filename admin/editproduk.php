@@ -7,14 +7,14 @@ include 'akses.php';
     </div>
 </div>
 <?php
-$ambil = $db->query("SELECT * FROM produk WHERE id_produk='$_GET[id]'");
-$pecah = $ambil->fetch(PDO::FETCH_ASSOC);
-var_dump($pecah);
+$ambil = $koneksi->query("SELECT * FROM produk WHERE id_produk='$_GET[id]'");
+$pecah = $ambil->fetch_assoc();
+//var_dump($pecah);
 ?>
 <?php
 $ambildata = [];
-$ambilkategori = $db->query("SELECT * FROM kategori");
-while ($pecahkategori = $ambilkategori->fetch(PDO::FETCH_ASSOC)) {
+$ambilkategori = $koneksi->query("SELECT * FROM kategori");
+while ($pecahkategori = $ambilkategori->fetch_assoc()) {
     $ambildata[] = $pecahkategori;
 }
 ?>
@@ -46,10 +46,6 @@ while ($pecahkategori = $ambilkategori->fetch(PDO::FETCH_ASSOC)) {
             <input type="number" min="0" value="<?= $pecah['stok_produk']; ?>" class="form-control" name="stok">
         </div>
         <div class="form-group">
-            <label for="berat_Produk">Berat Produk(Gr)</label>
-            <input type="number" min="0" value="<?= $pecah['berat_produk']; ?>" class="form-control" name="berat">
-        </div>
-        <div class="form-group">
             <label for="spesifikasi_Produk">Spesifikasi Produk</label>
             <textarea name="spesifikasi" class="form-control" cols="30" rows="10"><?= $pecah['spesifikasi_produk']; ?></textarea>
         </div>
@@ -70,9 +66,9 @@ while ($pecahkategori = $ambilkategori->fetch(PDO::FETCH_ASSOC)) {
     //jika foto diruabah
     if (!empty($lokasi)) {
         move_uploaded_file($lokasi, "../foto_produk/$namafoto");
-        $db->query("UPDATE produk SET id_kategori='$_POST[kategori]',nama_produk='$_POST[nama]',harga_produk='$_POST[harga]',stok_produk='$_POST[stok]',berat_produk='$_POST[berat]',spesifikasi_produk='$_POST[spesifikasi]',foto_produk='$namafoto' WHERE id_produk='$_GET[id]'");
+        $koneksi->query("UPDATE produk SET id_kategori='$_POST[kategori]',nama_produk='$_POST[nama]',harga_produk='$_POST[harga]',stok_produk='$_POST[stok]',berat_produk='$_POST[berat]',spesifikasi_produk='$_POST[spesifikasi]',foto_produk='$namafoto' WHERE id_produk='$_GET[id]'");
     } else {
-        $db->query("UPDATE produk SET id_kategori='$_POST[kategori]',nama_produk='$_POST[nama]',harga_produk='$_POST[harga]',stok_produk='$_POST[stok]',berat_produk='$_POST[berat]',spesifikasi_produk='$_POST[spesifikasi]' WHERE id_produk='$_GET[id]'");
+        $koneksi    ->query("UPDATE produk SET id_kategori='$_POST[kategori]',nama_produk='$_POST[nama]',harga_produk='$_POST[harga]',stok_produk='$_POST[stok]',berat_produk='$_POST[berat]',spesifikasi_produk='$_POST[spesifikasi]' WHERE id_produk='$_GET[id]'");
     }
     echo "<script>alert('Produk berhasil dirubah');</script>";
     echo "<script>location='index.php?halaman=produk';</script>";
