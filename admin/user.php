@@ -22,8 +22,8 @@ include 'akses.php';
         </thead>
         <tbody>
             <?php $nomor = 1; ?>
-            <?php $ambil = $db->query("SELECT * FROM user");
-            while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) { ?>
+            <?php $ambil = $koneksi->query("SELECT * FROM user");
+            while ($pecah = $ambil->fetch_assoc()){ ?>
                 <tr>
                     <th><?= $nomor ?></th>
                     <td><?= $pecah['name']; ?></td>
