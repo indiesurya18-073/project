@@ -5,7 +5,7 @@ session_start();
 require_once("koneksi.php");
 
 include 'navbar.php';
-if (isset($_SESSION["user"])) header("Location: index.php");
+
 if (isset($_POST['login'])) {
 
 	$ambil = $koneksi->query("SELECT * FROM user WHERE username='$_POST[username]' AND password='$_POST[password]'");
@@ -13,20 +13,26 @@ if (isset($_POST['login'])) {
 
 	if($akunyangcocok==1){
         $akun= $ambil->fetch_assoc();
-        $_SESSION['user'] = $akun;
-        echo "<script>alert('Login Berhasil');</script>";
-        if(isset($_SESSION['keranjang']) OR !empty($_SESSION['keranjang'])){
-        echo "<script>location='checkout.php'</script>";
-      }
-      else{
-        echo "<script>location='index.php'</script>";
-      }
-    }
-    else{
-        echo "<script>alert('Anda Gagal Login');</script>";
-        echo "<script>location='login.php'</script>";
-    }
-     }
+        if ($akun['level']=="admin"){
+        	$_SESSION['admin']=$akun;
+        	echo "<script>alert('Login Berhasil');</script>";
+        	header("Location: admin/index.php");
+        }
+        elseif ($akun['level']=="user"){
+        	$_SESSION['user']=$akun;
+	        if(isset($_SESSION['keranjang']) OR !empty($_SESSION['keranjang'])){
+	        	echo "<script>location='checkout.php'</script>";
+	    	}
+      		else{
+       			 echo "<script>location='index.php'</script>";
+       		}
+       	}
+    	else{
+	        echo "<script>alert('Anda Gagal Login');</script>";
+	        echo "<script>location='login.php'</script>";
+    	}
+     	}
+ }
 ?>
 
 <body>

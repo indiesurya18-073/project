@@ -118,8 +118,9 @@ if(!isset($_SESSION['keranjang']) OR (empty($_SESSION['keranjang']))){
                $nama_kota = $pecah['nama_kota'];
                $biaya_ongkir = $pecah['biaya_ongkir'];
                $total_pembelian=$totalbelanja+$biaya_ongkir;
+               $status_pembelian ="Pending";
                // menyimpan data ke tabel pembelian 
-               $koneksi->query("INSERT INTO pembelian (id_user,tanggal_pembelian,nama_kota,total_pembelian,biaya_ongkir,alamat_pengiriman) VALUES ('$id_pelanggan','$tanggal_pembelian','$nama_kota','$total_pembelian','$biaya_ongkir','$alamat_pengiriman')");
+               $koneksi->query("INSERT INTO pembelian (id_user,tanggal_pembelian,nama_kota,total_pembelian,biaya_ongkir,alamat_pengiriman,status_pembelian) VALUES ('$id_pelanggan','$tanggal_pembelian','$nama_kota','$total_pembelian','$biaya_ongkir','$alamat_pengiriman','$status_pembelian')");
                //mendapatkan id pembelian yang baru terjadi
                $nota =  $koneksi->insert_id;
 

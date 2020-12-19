@@ -59,7 +59,7 @@ include 'akses.php';
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/admin.jpeg" class="img-circle" alt="Avatar"> <span>Admin</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
+                                <li><a href="index.php?halaman=profiladmin"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                                 <li><a href="index.php?halaman=logout"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                             </ul>
                         </li>
@@ -107,6 +107,8 @@ include 'akses.php';
                                 include 'detailpembelian.php';
                             } else if ($_GET['halaman'] == "user") {
                                 include 'user.php';
+                            } else if ($_GET['halaman'] == "profiladmin") {
+                                include 'profiladmin.php';
                             } else if ($_GET['halaman'] == "pembayaran") {
                                 include 'pembayaran.php';
                             } else if ($_GET['halaman'] == "laporan_pembelian") {
